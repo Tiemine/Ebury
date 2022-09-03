@@ -2,6 +2,7 @@
   <div class="card">
     <div class="card__label">{{ label }}</div>
     <div v-if="USA" class="card__symbol">USD</div>
+    <div class="currency-flag currency-flag-usd"></div>
     <div v-if="!USA" class="card__combobox">
       <span class="card__symbol" @click="open = !open">{{
         storeCurrency.selectedCurrency
@@ -16,7 +17,7 @@
             :key="flag"
             @click="handleSelect(key)"
           >
-            <i :class="`currency-flag currency-flag-${key.toLowerCase()}`" />{{ flag }} ({{ key }})
+            {{ key }}
           </li>
         </ul>
       </div>
@@ -25,7 +26,6 @@
       type="number"
       class="card__input"
       :value="checkValue()"
-      @keydown="preventInput"
       :autofocus="!USA"
       @input="handleInput"
     />
@@ -51,18 +51,12 @@ const props = defineProps({
 });
 
 const checkValue = () =>
-  props.USA ? storeCurrency.baseValue.toFixed(2) : storeCurrency.targetValue.toFixed(2);
+  props.USA ? storeCurrency.baseValue : storeCurrency.targetValue;
 
 const handleSelect = (key) => {
   storeCurrency.setNewCurrency(key);
   open.value = !open.value;
 };
-
-const preventInput = (evt) => {
-  //deixar acontecer se for backspace
-  const inputValue = evt.target.value;
-  if (inputValue.split(".").at(-1).length > 1) evt.preventDefault();
-}
 
 const handleInput = (evt) => {
   const inputValue = evt.target.value;
@@ -74,7 +68,7 @@ const handleInput = (evt) => {
 <style scoped lang="scss">
 .card {
   margin: 24px 32px;
-  width: 300px;
+  width: 250px;
   &__list-wrapper {
     width: 100%;
     font-weight: 500;
@@ -135,15 +129,10 @@ const handleInput = (evt) => {
       padding: 0;
       li {
         padding: 10px;
-        font-weight: 300;
+        font-weight: 500;
         cursor: pointer;
-        display: flex;
-        align-items: center;
         &:hover {
           background: #f5f5f5;
-        }
-        i{
-          margin-right: 8px;
         }
       }
     }
