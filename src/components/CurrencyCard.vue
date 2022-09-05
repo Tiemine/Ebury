@@ -9,7 +9,6 @@
       <div
         :class="['card__list-wrapper', { 'card__list-wrapper--open': open }]"
       >
-        <input type="text" />
         <ul>
           <li
             v-for="(flag, key) in storeCurrency.currencyFlags"
@@ -25,9 +24,10 @@
       type="number"
       class="card__input"
       :value="checkValue()"
-      @keydown="preventInput"
       :autofocus="!USA"
+      @keydown="preventInput"
       @input="handleInput"
+      @keyup="formatToFixed"
     />
   </div>
 </template>
@@ -59,16 +59,28 @@ const handleSelect = (key) => {
 };
 
 const preventInput = (evt) => {
-  //deixar acontecer se for backspace
-  const inputValue = evt.target.value;
-  if (inputValue.split(".").at(-1).length > 1) evt.preventDefault();
-}
+  const inputValue = parseFloat(evt.target.value);
+  const valid = +String(inputValue) === +String(inputValue.toFixed(2));
+
+  if (valid || isNaN(inputValue)) return;
+  if (/^\d*$/.test(evt.key)) evt.preventDefault();
+};
 
 const handleInput = (evt) => {
   const inputValue = evt.target.value;
   if (props.USA) storeCurrency.targetCurrency(inputValue);
   else storeCurrency.baseCurrency(inputValue);
 };
+
+const formatToFixed = (evt) => {
+  const decimals = evt.target.value.includes(".")
+    ? evt.target.value.split(".").at(-1)
+    : 0;
+  if (decimals.length > 2) {
+    const toFixed = parseFloat(evt.target.value).toFixed(2);
+    evt.target.value = toFixed;
+  }
+}
 </script>
 
 <style scoped lang="scss">

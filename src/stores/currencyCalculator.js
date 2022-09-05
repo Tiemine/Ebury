@@ -17,6 +17,9 @@ export const useCurrencyStore = defineStore({
 
       return `${hour}:${minutes} UTC`;
     },
+    equivalentCurrency: (state) => {
+      return state.currencyRates.rates ? state.currencyRates.rates[state.selectedCurrency].toFixed(2) : undefined;
+    },
   },
   actions: {
     setNewCurrency(currency) {

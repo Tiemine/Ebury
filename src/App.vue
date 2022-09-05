@@ -9,7 +9,8 @@
       <span>1.00 USD</span>
       equals to
       <span>
-        {{ storeCurrency.selectedCurrency }}
+          {{ storeCurrency.equivalentCurrency }}
+          {{ storeCurrency.selectedCurrency }}
         </span>
       </p>
       <p>Mid-market exchange rate at {{ storeCurrency.lastUpdateAt }}</p>
