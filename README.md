@@ -1,41 +1,39 @@
-# Ebury
+## 💻 About
+### The application was made with:
+<span style="color: #42b883">Vue 3</span> framework</br>
+<span style="color: #a6cc00">Pinia</span> as state manager</br>
+<span style="color: #a6cc00">Vitest</span> as unit testing tool</br>
 
-This template should help get you started developing with Vue 3 in Vite.
+## Demo
+You can access the demo application [here](https://main.dvyftkueicavg.amplifyapp.com/)
 
-## Recommended IDE Setup
+## 👩‍💻 Installing the project
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- First git clone this project with the following:
 
-## Customize configuration
+```
+git clone https://github.com/Tiemine/Ebury.git
+```
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+- Then go to the project root and run the install command:
 
-## Project Setup
-
-```sh
+```
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+or
 
-```sh
+```
+yarn install
+```
+
+- After that run the following command to run the application:
+```
 npm run dev
 ```
 
-### Compile and Minify for Production
+- Access the given local port to access the application, or paste this here on you browser:
 
-```sh
-npm run build
 ```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
+http://localhost:5173/
 ```
