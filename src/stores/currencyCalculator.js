@@ -23,8 +23,9 @@ export const useCurrencyStore = defineStore({
   },
   actions: {
     setNewCurrency(currency) {
+      const baseMultiplier = this.targetValue / this.currencyRates.rates[this.selectedCurrency];
       this.selectedCurrency = currency;
-      this.targetValue = this.currencyRates.rates[currency];
+      this.targetValue = baseMultiplier * this.currencyRates.rates[currency];
     },
     targetCurrency(value) {
       this.targetValue =
