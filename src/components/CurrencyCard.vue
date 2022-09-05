@@ -39,6 +39,7 @@ import { useCurrencyStore } from "../stores/currencyCalculator";
 const storeCurrency = useCurrencyStore();
 const open = ref(false);
 
+// This USA property is setted so when the input has it there is no select with other currencies
 const props = defineProps({
   USA: {
     type: Boolean,
@@ -59,6 +60,7 @@ const handleSelect = (key) => {
 };
 
 const preventInput = (evt) => {
+  // This is the keydown function, it prevents the value of the input to be updated if the key pressed is a number and the input already has two decimals
   const inputValue = parseFloat(evt.target.value);
   const valid = +String(inputValue) === +String(inputValue.toFixed(2));
 
@@ -67,12 +69,16 @@ const preventInput = (evt) => {
 };
 
 const handleInput = (evt) => {
+  // This is the input function, it sets a new value at the store from what was typed on the input
+
   const inputValue = evt.target.value;
   if (props.USA) storeCurrency.targetCurrency(inputValue);
   else storeCurrency.baseCurrency(inputValue);
 };
 
 const formatToFixed = (evt) => {
+  // This is the keyup function, it will remove a aditional number from the input if there is more than 2 decimals
+
   const decimals = evt.target.value.includes(".")
     ? evt.target.value.split(".").at(-1)
     : 0;
@@ -176,6 +182,11 @@ const formatToFixed = (evt) => {
     }
     border: 0;
     -moz-appearance: textfield;
+  }
+  @media screen and (max-width: 700px) {
+    width: 100%;
+    margin: 0;
+    padding: 12px;
   }
 }
 </style>

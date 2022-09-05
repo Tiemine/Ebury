@@ -15,6 +15,7 @@
       </p>
       <p>Mid-market exchange rate at {{ storeCurrency.lastUpdateAt }}</p>
     </div>
+    <p class="note">Note: Since the API from Open Exchange does not allow to have more than 1 base currency on its free version I made the first input to always be USD and the other input can receive all the other currencies</p>
   </div>
 </template>
 
@@ -27,6 +28,7 @@ import CurrencyCardVue from "./components/CurrencyCard.vue";
 
 const storeCurrency = useCurrencyStore();
 
+// This forces a new request for the API every 30 minutes and updates the data on the store
 setInterval(() => {
   renewData();
 }, 60000 * 30);
@@ -57,8 +59,18 @@ onMounted(async () => {
   align-items: center;
   color: #4a4a4a;
   background: #f7f7f7;
+  overflow: hidden;
   .widget{
     display: flex;
+    @media screen and (max-width: 700px) {
+      flex-direction: column;
+    }
+  }
+  .note{
+    font-size: 12px;
+    margin-top: 80px;
+    width: 600px;
+    padding: 12px;
   }
   .messages{
     font-size: 16px;
